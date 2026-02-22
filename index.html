@@ -3,116 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAYASH ELITE BUSINESS GLOBAL</title>
+    <title>JAYASH GLOBAL | 3D ELITE HUB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;900&display=swap" rel="stylesheet">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: #000; color: #fff; overflow-x: hidden; padding-bottom: 80px; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f5f5f7; color: #1d1d1f; } /* Apple Style White Background */
+
+        /* Ultra Premium Header */
+        header { background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); padding: 20px; text-align: center; border-bottom: 1px solid #d2d2d7; position: sticky; top: 0; z-index: 1000; }
+        .brand { font-size: 20px; font-weight: 900; letter-spacing: 5px; color: #000; text-transform: uppercase; }
+
+        /* 3D Model Viewer Container */
+        .viewer-3d { width: 100%; height: 400px; background: #fff; margin: 20px 0; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; position: relative; }
+        .control-hint { position: absolute; bottom: 20px; background: #000; color: #fff; padding: 5px 15px; border-radius: 20px; font-size: 10px; }
+
+        /* Horizontal Category Section */
+        .section { padding: 40px 20px; }
+        .section-name { font-size: 28px; font-weight: 600; margin-bottom: 25px; color: #1d1d1f; }
+        .grid { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 20px; scrollbar-width: none; }
         
-        /* Premium Glass Header */
-        header { padding: 25px; background: rgba(0,0,0,0.8); border-bottom: 2px solid gold; text-align: center; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(15px); }
-        .logo { font-size: 22px; font-weight: bold; letter-spacing: 5px; color: gold; text-shadow: 0 0 10px gold; }
+        /* Modern White Card */
+        .card { min-width: 280px; background: #fff; border-radius: 25px; padding: 20px; transition: 0.4s; border: 1px solid #e5e5e5; }
+        .card:hover { transform: scale(1.03); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 200px; object-fit: contain; }
+        .price { font-size: 18px; font-weight: bold; margin-top: 15px; color: #0071e3; }
+        .sub-price { font-size: 12px; color: #86868b; }
 
-        /* Categorized Sections */
-        .section-wrapper { padding: 20px; display: none; }
-        .section-wrapper.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+        /* Business Tab Icons */
+        .biz-tools { background: #fff; padding: 30px; border-radius: 30px; margin: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .tool { background: #f5f5f7; padding: 20px; border-radius: 20px; text-align: center; border: 1px solid #d2d2d7; }
 
-        .section-title { font-size: 24px; color: gold; margin-bottom: 20px; border-left: 4px solid gold; padding-left: 15px; }
-
-        /* Horizontal Scroll for iPhones (11 to 17) */
-        .item-scroll { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; }
-        .item-card { min-width: 250px; background: #111; border-radius: 20px; padding: 15px; border: 1px solid #222; text-align: center; }
-        .item-card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 10px; }
-        
-        /* Business Download Section */
-        .biz-box { background: linear-gradient(135deg, #1a1a1a, #000); padding: 20px; border-radius: 15px; border: 1px dashed gold; margin-bottom: 15px; }
-        .download-btn { background: gold; color: #000; padding: 10px 20px; border-radius: 5px; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 10px; }
-
-        /* Bottom Pro Navigation */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 75px; background: #050505; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #222; z-index: 1000; }
-        .nav-btn { background: none; border: none; color: #555; font-size: 11px; cursor: pointer; transition: 0.3s; }
-        .nav-btn.active { color: gold; transform: scale(1.1); }
-        .nav-btn i { font-size: 24px; display: block; margin-bottom: 5px; }
+        /* Bottom Menu */
+        nav { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 90%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); height: 65px; border-radius: 40px; display: flex; justify-content: space-around; align-items: center; }
+        .nav-link { color: #fff; text-decoration: none; font-size: 12px; text-align: center; }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<header><div class="logo">JAYASH ELITE WORLD</div></header>
+<header><div class="brand">JAYASH ELITE WORLD</div></header>
 
-<div id="phones" class="section-wrapper active">
-    <h2 class="section-title">iPhone Series (11 to 17 Pro)</h2>
-    <div class="item-scroll">
-        <div class="item-card">
-            <img src="https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=300" alt="iPhone 11">
-            <p>iPhone 11 Pro</p>
-            <p style="color:gold;">₹45,000 | $540</p>
+<div class="section">
+    <h2 class="section-name">360° Elite Showcase</h2>
+    <div class="viewer-3d">
+        <p>🔄 Touch & Rotate 3D iPhone 16 Pro</p>
+        <img src="https://www.apple.com/v/iphone-16-pro/a/images/overview/welcome/hero_endframe__ov6ewpeidp6e_large.jpg" style="width: 80%; height: auto;">
+        <div class="control-hint">Click to see Camera & Speakers</div>
+    </div>
+</div>
+
+<div class="section">
+    <h2 class="section-name">iPhone Timeline</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-11-2.jpg">
+            <h3>iPhone 11 Pro</h3>
+            <p class="price">₹45,000 <span class="sub-price">/ $540</span></p>
         </div>
-        <div class="item-card">
-            <img src="https://images.unsplash.com/photo-1696446701796-da61225697cc?w=300" alt="iPhone 16">
-            <p>iPhone 16 Pro Max</p>
-            <p style="color:gold;">₹1,70,000 | $1,299</p>
+        <div class="card">
+            <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-16-pro-max-1.jpg">
+            <h3>iPhone 16 Pro Max</h3>
+            <p class="price">₹1,70,000 <span class="sub-price">/ $1,299</span></p>
         </div>
-        <div class="item-card">
-            <div style="height:200px; display:flex; align-items:center; justify-content:center; color:gold;">[ 3D Model iPhone 17 ]</div>
-            <p>iPhone 17 (Concept)</p>
-            <p style="color:gold;">Coming Soon</p>
+        <div class="card">
+            <div style="height:200px; background:#f0f0f0; border-radius:15px; display:flex; align-items:center; justify-content:center;">3D Concept</div>
+            <h3>iPhone 17 (Future)</h3>
+            <p class="price">Coming 2026</p>
         </div>
     </div>
 </div>
 
-<div id="fashion" class="section-wrapper">
-    <h2 class="section-title">Royal Fashion (Kids & Adults)</h2>
-    <div class="item-scroll">
-        <div class="item-card">
-            <img src="https://images.unsplash.com/photo-1594932224010-75f27930148c?w=300">
-            <p>Men's Elite Suit</p>
+<div class="section">
+    <h2 class="section-name">Businessman Karobar</h2>
+    <div class="biz-tools">
+        <div class="tool">
+            <h4>Ad Editor</h4>
+            <p>Download App</p>
         </div>
-        <div class="item-card">
-            <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=300">
-            <p>Women's Luxury Wear</p>
+        <div class="tool">
+            <h4>Logo Pack</h4>
+            <p>3D Downloads</p>
         </div>
     </div>
 </div>
 
-<div id="business" class="section-wrapper">
-    <h2 class="section-title">Business & Ads Karobar</h2>
-    <div class="biz-box">
-        <h3>Company Ad Maker Tools</h3>
-        <p>Create professional ads for your brand.</p>
-        <a href="#" class="download-btn">Open Ad Editor</a>
-    </div>
-    <div class="biz-box">
-        <h3>Logo Downloads</h3>
-        <p>Premium 3D Logos for businessmen.</p>
-        <a href="#" class="download-btn"><i class="fas fa-download"></i> Download Pack</a>
-    </div>
-</div>
-
-<div id="cars" class="section-wrapper">
-    <h2 class="section-title">Luxury Car Collection</h2>
-    <div class="item-card" style="width:100%;">
-        <div style="height:300px; background:#111; color:gold; display:flex; align-items:center; justify-content:center;">[ 3D CAR ANIMATION LOADING ]</div>
-        <h3>Rolls Royce Elite Edition</h3>
-    </div>
-</div>
-
-<nav class="bottom-nav">
-    <button class="nav-btn active" onclick="showSection('phones', this)"><i class="fas fa-mobile-alt"></i>Phones</button>
-    <button class="nav-btn" onclick="showSection('fashion', this)"><i class="fas fa-tshirt"></i>Fashion</button>
-    <button class="nav-btn" onclick="showSection('cars', this)"><i class="fas fa-car"></i>Cars</button>
-    <button class="nav-btn" onclick="showSection('business', this)"><i class="fas fa-briefcase"></i>Business</button>
+<nav>
+    <a href="#" class="nav-link">Phones</a>
+    <a href="#" class="nav-link">Fashion</a>
+    <a href="#" class="nav-link">Cars</a>
+    <a href="#" class="nav-link">Business</a>
 </nav>
 
-<script>
-    function showSection(id, btn) {
-        document.querySelectorAll('.section-wrapper').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        btn.classList.add('active');
-    }
-</script>
-
 </body>
-    </html>
-    
+</html>
