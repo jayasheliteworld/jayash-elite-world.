@@ -3,104 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAYASH ELITE GLOBAL BRAND</title>
-    <script src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #ffffff; color: #000; overflow-x: hidden; }
-
-        /* Navigation Bar - Bottom Pro Style */
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.9); display: flex; justify-content: space-around; padding: 15px 0; z-index: 1000; border-top: 2px solid gold; border-radius: 20px 20px 0 0; }
-        .nav-item { color: white; text-align: center; font-size: 12px; cursor: pointer; text-decoration: none; }
-        .nav-item i { display: block; font-size: 20px; margin-bottom: 5px; color: gold; }
-
-        /* Hero Section */
-        header { padding: 40px 20px; text-align: center; background: #fff; }
-        .logo { font-size: 30px; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; color: #000; }
-        .gold-divider { height: 3px; width: 100px; background: gold; margin: 15px auto; }
-
-        /* 3D Showcase Section */
-        .section { display: none; padding: 20px; animation: slideUp 0.5s ease-in-out; }
-        .section.active { display: block; }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        /* 3D Model Viewer Style */
-        model-viewer { width: 100%; height: 450px; background-color: #f9f9f9; border-radius: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
-
-        /* Grid for Products */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; }
-        .product-card { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 15px; text-align: center; transition: 0.3s; }
-        .product-card:hover { border-color: gold; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; border-radius: 10px; }
-
-        /* Business Tools */
-        .biz-tool { background: #fdf6e3; border: 2px dashed gold; padding: 30px; border-radius: 20px; text-align: center; margin-top: 20px; }
-        .btn-download { background: #000; color: gold; padding: 12px 25px; border-radius: 30px; border: none; font-weight: bold; margin-top: 15px; cursor: pointer; }
-
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-
-<header>
-    <div class="logo">JAYASH ELITE WORLD</div>
-    <div class="gold-divider"></div>
-</header>
-
-<div id="phones" class="section active">
-    <h2 style="text-align: center; margin-bottom: 20px;">Elite Mobile 3D Universe</h2>
-    <model-viewer src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" auto-rotate camera-controls shadow-intensity="1" alt="3D Phone Model"></model-viewer>
-    <p style="text-align: center; font-size: 12px; margin-top: 10px;">Touch to rotate & see every detail</p>
+    <title>JAYASH ELITE WORLD | Premium Shopping</title>
     
-    <div class="product-grid">
-        <div class="product-card"><h3>iPhone 17 Pro</h3><p>₹1,80,000</p></div>
-        <div class="product-card"><h3>iPhone 16 Max</h3><p>₹1,60,000</p></div>
-        <div class="product-card"><h3>S26 Ultra</h3><p>₹1,45,000</p></div>
-        <div class="product-card"><h3>Gaming Phone</h3><p>₹95,000</p></div>
-    </div>
-</div>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<div id="cars" class="section">
-    <h2 style="text-align: center; color: gold;">Luxury Car 3D Showroom</h2>
-    <div style="height: 300px; background: #000; color: gold; display: flex; align-items: center; justify-content: center; border-radius: 20px;">
-        <p>[ 3D CAR CHALTI HUI ANIMATION ]</p>
-    </div>
-    <div class="product-grid">
-        <div class="product-card"><h3>Rolls Royce</h3></div>
-        <div class="product-card"><h3>Lamborghini</h3></div>
-    </div>
-</div>
+    <!-- Model Viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 
-<div id="fashion" class="section">
-    <h2 style="text-align: center;">Live Fashion Ramp (Men & Women)</h2>
-    <div style="height: 400px; background: #eee; border-radius: 20px; display: flex; align-items: center; justify-content: center;">
-        <p>[ AI MODEL LIVE DRESS CHANGE ]</p>
-    </div>
-</div>
+    <style>
+        :root {
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --white-off: #fdfdfd;
+            --text-dark: #1a1a1a;
+        }
 
-<div id="business" class="section">
-    <h2 style="text-align: center;">Business Ad & Logo Hub</h2>
-    <div class="biz-tool">
-        <h3>AI AD MAKER</h3>
-        <p>Enter Brand Name & Get 3D Video</p>
-        <input type="text" placeholder="Enter Company Name" style="padding: 10px; width: 80%; border-radius: 10px; border: 1px solid #ccc;">
-        <br><button class="btn-download">Generate & Download</button>
-    </div>
-</div>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white-off);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
 
-<div class="bottom-nav">
-    <div class="nav-item" onclick="showSection('phones')"><i class="fas fa-mobile-alt"></i>Phones</div>
-    <div class="nav-item" onclick="showSection('fashion')"><i class="fas fa-tshirt"></i>Fashion</div>
-    <div class="nav-item" onclick="showSection('cars')"><i class="fas fa-car"></i>Cars</div>
-    <div class="nav-item" onclick="showSection('business')"><i class="fas fa-briefcase"></i>Business</div>
-</div>
+        .font-elite {
+            font-family: 'Playfair Display', serif;
+        }
 
-<script>
-    function showSection(id) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-    }
-</script>
+        /* Gold Gradient Text & Borders */
+        .text-gold {
+            background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
 
-</body>
-</html>
+        .bg-gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 50%, #d4af37 100%);
+        }
+
+        .border-gold {
+            border: 1px solid #d4af37;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        /* 3D Model Customization */
+        model-viewer {
+            width: 100%;
+            height: 400px;
+            background-color: transparent;
+            --poster-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37; 
+            border-radius: 4px;
+        }
+
+        /* Bottom Nav Mobile */
+        .mobile-nav {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #eee;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .nav-item {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #666;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .nav-item.active {
+            color: #d4af37;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        /* AI Loader */
+        .ai-loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #d4af37;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="pb-20">
+
+    <!-- HEADER -->
+    <header
