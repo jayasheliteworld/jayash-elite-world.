@@ -3,73 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAYASH ELITE WORLD | Premium Global Store</title>
+    <title>JAYASH ELITE WORLD | The Future of Luxury</title>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
+    <script async src="https://unpkg.com/three@0.158.0/examples/jsm/controls/OrbitControls.js"></script>
+    <script async src="https://unpkg.com/three@0.158.0/examples/jsm/loaders/GLTFLoader.js"></script>
+
     <style>
-        body { margin: 0; background-color: #0c0c0c; color: #fff; font-family: 'Poppins', sans-serif; }
-        header { background: #000; padding: 20px; text-align: center; border-bottom: 2px solid gold; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 24px; font-weight: bold; color: gold; letter-spacing: 2px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         
-        .section-title { padding: 20px; font-size: 20px; color: gold; border-left: 5px solid gold; margin: 10px; background: #1a1a1a; }
-        
-        .product-grid { display: flex; flex-wrap: wrap; justify-content: center; }
-        .product-card { background: #151515; width: 90%; margin: 15px; border-radius: 20px; overflow: hidden; border: 1px solid #333; position: relative; }
-        
-        .product-img { width: 100%; height: 350px; object-fit: cover; }
-        .rating { color: #ffcc00; padding: 10px; font-size: 14px; }
-        
-        .details { padding: 15px; text-align: left; }
-        .price-tag { font-size: 18px; font-weight: bold; color: #00ff00; margin: 5px 0; }
-        .usd-price { font-size: 14px; color: #aaa; text-decoration: none; }
-        
-        .buy-btn { width: 100%; background: gold; color: #000; padding: 15px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; }
-        
-        .mayra-help { position: fixed; bottom: 20px; right: 20px; background: rgba(255, 215, 0, 0.9); color: #000; padding: 12px; border-radius: 50px; font-weight: bold; box-shadow: 0 0 15px gold; }
+        /* Animated Golden Header */
+        header { 
+            background: linear-gradient(90deg, #1a1a1a, #000, #1a1a1a); 
+            padding: 40px 20px; 
+            text-align: center; 
+            border-bottom: 4px solid gold; 
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5); 
+            position: relative; 
+            overflow: hidden;
+        }
+        .logo { 
+            font-size: 3.5vw; /* Responsive font size */
+            font-weight: 900; 
+            color: gold; 
+            text-transform: uppercase; 
+            letter-spacing: 0.8vw; /* Responsive letter spacing */
+            text-shadow: 0 0 15px gold, 0 0 30px rgba(255, 215, 0, 0.7);
+            position: relative;
+            z-index: 2;
+        }
+        /* Particle effect for logo */
+        .gold-particle {
+            position: absolute;
+            background: radial-gradient(circle, gold 0%, transparent 70%);
+            border-radius: 50%;
+            animation: particle-anim 5s infinite ease-out;
+            opacity: 0;
+            z-index: 1;
+        }
+        @keyframes particle-anim {
+            0% { transform: scale(0) translate(0,0); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: scale(1.5) translate(var(--x), var(--y)); opacity: 0; }
+        }
+
+        /* 3D Product Container */
+        .product-section { 
+            background: linear-gradient(180deg, #0a0a0a, #000); 
+            padding: 50px 20px; 
+            text-align: center;
+        }
+        .section-heading { 
+            font-size: 3vw; 
+            color: gold; 
+            margin-bottom: 40px; 
+            text-shadow: 0 0 10px gold; 
+            letter-spacing: 0.2vw;
+        }
+        .product-display { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 40px; 
+            max-width: 1400px; 
+            margin: 0 auto;
+        }
+        .product-card-3d { 
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a); 
+            border: 2px solid #333; 
+            border-radius: 25px; 
+            padding: 25px; 
+            text-align: center; 
+            box-shadow: 0 0 15px rgba(0,0,0,0.5); 
+            transition: all 0.5s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            height: 600px; /* Fixed height for 3D model */
+        }
+        .product-card-3d:hover { 
+            border-color: gold; 
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7); 
+            transform: translateY(-15px); 
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 300px; /* Height for 3D canvas */
+            margin-bottom: 20px;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .product-title { font-size: 1.8vw; color: #fff; margin-bottom: 10px; }
+        .product-rating { color: #f1c40f; margin-bottom: 15px; font-size: 0.9vw; }
+        .price-info { 
+            background: #000; 
+            padding: 12px; 
+            border-radius: 10px; 
+            margin-bottom: 25px; 
+            border: 1px solid #333;
+        }
+        .price-inr { font-size: 2.2vw; color: #00ff00; font-weight: bold; }
+        .price-usd { font-size: 1.2vw; color: #aaa; margin-left: 10px; }
+        .action-btn { 
+            background: gold; 
+            color: #000; 
+            width: 90%; 
+            padding: 18px; 
+            border: none; 
+            font-weight: 900; 
+            font-size: 1.5vw; 
+            cursor: pointer; 
+            border-radius: 10px; 
+            transition: background 0.3s;
+        }
+        .action-btn:hover { background: #ffd700; box-shadow: 0 0 15px gold; }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .logo { font-size: 7vw; letter-spacing: 1.5vw; }
+            .section-heading { font-size: 6vw; }
+            .product-title { font-size: 4vw; }
+            .product-rating { font-size: 2.5vw; }
+            .price-inr { font-size: 5vw; }
+            .price-usd { font-size: 3vw; }
+            .action-btn { font-size: 4vw; padding: 15px; }
+            .product-card-3d { height: 500px; }
+            .canvas-container { height: 250px; }
+        }
+
+        .mayra-ai-btn { 
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            background: gold; 
+            color: #000; 
+            padding: 18px 25px; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            box-shadow: 0 0 25px gold; 
+            z-index: 9999; 
+            cursor: pointer;
+            font-size: 1.2vw;
+        }
+        @media (max-width: 768px) {
+            .mayra-ai-btn { font-size: 3.5vw; padding: 15px 20px; }
+        }
     </style>
 </head>
 <body>
 
-<header><div class="logo">JAYASH ELITE WORLD</div></header>
+<header>
+    <div class="logo">JAYASH ELITE WORLD</div>
+</header>
 
-<div class="section-title">📱 ELITE SMARTPHONES</div>
-<div class="product-grid">
-    <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=400" class="product-img">
-        <div class="rating">⭐⭐⭐⭐⭐ (4.9/5 Ratings)</div>
-        <div class="details">
-            <h3>iPhone 15 Pro Max (Elite Edition)</h3>
-            <div class="price-tag">₹1,59,900 <span class="usd-price">/ $1,199</span></div>
-            <button class="buy-btn">ORDER FROM USA / INDIA</button>
+<div class="product-section">
+    <h2 class="section-heading">✨ THE FUTURE OF LUXURY IS HERE ✨</h2>
+    <div class="product-display">
+        
+        <div class="product-card-3d">
+            <div class="canvas-container" id="iphone-container"></div>
+            <div class="info">
+                <span class="category">ELITE SMARTPHONES</span>
+                <div class="title">iPhone 15 Pro Max </div>
+                <div class="rating">⭐⭐⭐⭐⭐ 5.0 (Top Rated)</div>
+                <div class="price-info">
+                    <span class="price-inr">₹1,59,900</span> <span class="price-usd">/ $1,199 USD</span>
+                </div>
+                <button class="action-btn">ORDER NOW (Global)</button>
+            </div>
         </div>
+
+        <div class="product-card-3d">
+            <div class="canvas-container" id="fashion-container"></div>
+            <div class="info">
+                <span class="category">ROYAL FASHION (AI-Powered)</span>
+                <div class="title">Exclusive Designer Suit </div>
+                <div class="rating">⭐⭐⭐⭐⭐ 4.9 (Best Seller)</div>
+                <div class="price-info">
+                    <span class="price-inr">₹45,000</span> <span class="price-usd">/ $540 USD</span>
+                </div>
+                <button class="action-btn">VIEW LIVE MODEL</button>
+            </div>
+        </div>
+
+        <div class="product-card-3d">
+            <div class="canvas-container" id="airpods-container"></div>
+            <div class="info">
+                <span class="category">ELITE AUDIO</span>
+                <div class="title">Apple AirPods Max (Luxury)</div>
+                <div class="rating">⭐⭐⭐⭐⭐ 4.8 (High Demand)</div>
+                <div class="price-info">
+                    <span class="price-inr">₹59,900</span> <span class="price-usd">/ $549 USD</span>
+                </div>
+                <button class="action-btn">GET YOURS NOW</button>
+            </div>
+        </div>
+
     </div>
 </div>
 
-<div class="section-title">👔 ROYAL FASHION (AZA STYLE)</div>
-<div class="product-grid">
-    <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1594932224010-75f27930148c?auto=format&fit=crop&q=80&w=400" class="product-img">
-        <div class="rating">⭐⭐⭐⭐⭐ (4.8/5 Ratings)</div>
-        <div class="details">
-            <h3>Premium Designer Suit</h3>
-            <div class="price-tag">₹45,000 <span class="usd-price">/ $540</span></div>
-            <button class="buy-btn">CHECK COLLECTION</button>
-        </div>
-    </div>
-</div>
+<div class="mayra-ai-btn">Mayra AI Help 🚀</div>
 
-<div class="section-title">🎧 ELITE ACCESSORIES</div>
-<div class="product-grid">
-    <div class="product-card">
-        <img src="https://images.unsplash.com/photo-1588423770674-f2855ee476e7?auto=format&fit=crop&q=80&w=400" class="product-img">
-        <div class="rating">⭐⭐⭐⭐⭐ (4.7/5 Ratings)</div>
-        <div class="details">
-            <h3>Apple AirPods Max (Luxury)</h3>
-            <div class="price-tag">₹59,900 <span class="usd-price">/ $549</span></div>
-            <button class="buy-btn">BUY NOW</button>
-        </div>
-    </div>
-</div>
 
-<div class="mayra-help">Mayra AI Help ℹ️</div>
+<script>
+    // Gold Particle Effect for Logo
+    const header = document.querySelector('header');
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'gold-particle';
+        const size = Math.random() * 10 + 5; // 5-15px
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // Random direction for movement
+        const xDir = (Math.random() - 0.5) * 200; // -100 to 100
+        const yDir = (Math.random() - 0.5) * 200; // -100 to 100
+        particle.style.setProperty('--x', `${xDir}px`);
+        particle.style.setProperty('--y', `${yDir}px`);
+
+        header.appendChild(particle);
+        setTimeout(() => particle.remove(), 5000); // Remove after animation
+    }
+    setInterval(createParticle, 300); // Create a particle every 300ms
+
+
+    // 3D Model Loading Function (using Three.js)
+    function load3DModel(containerId, modelPath) {
+        const container = document.getElementById(containerId);
+        if (!container) return; // Exit if container not found
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setClearColor(0x000000, 0); // Transparent background
+        container.appendChild(renderer.domElement);
+
+        // Responsive rendering
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(0, 1, 1).normalize();
+        scene.add(directionalLight);
+
+        // Controls for interaction
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = true;
+        controls.enablePan = false;
+        controls.autoRotate = true; // Auto-rotate for display
+        controls.autoRotateSpeed = 2.0;
+
+        let model;
+        const loader = new THREE.GLTFLoader();
+        loader.load(modelPath, (gltf) => {
+            model = gltf.scene;
+            scene.add(model);
+
+            // Center and scale model
+            const bbox = new THREE.Box3().setFromObject(model);
+            const center = bbox.getCenter(new THREE.Vector3());
+            const size = bbox.getSize(new THREE.Vector3());
+            
+            // Adjust camera to fit model
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fov = camera.fov * (Math.PI / 180);
+            let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+            camera.position.set(center.x, center.y, center.z + cameraZ * 1.5); // Move camera back
+
+            // Set target for controls
+            controls.target.set(center.x, center.y, center.z);
+            controls.update();
+
+            // Store original position for potential reset
+            model.userData.originalPosition = model.position.clone();
+
+        }, undefined, (error) => {
+            console.error('An error occurred loading the GLTF model:', error);
+            container.innerHTML = `<div style="color:red; margin-top:100px;">Error loading 3D model.</div>`;
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+    }
+
+    // Load actual 3D models (replace with your .glb paths)
+    // IMPORTANT: You need to host these .glb files online for them to work
+    // For now, I'm using placeholder URLs. You'll need to upload your models.
+    document.addEventListener('DOMContentLoaded', () => {
+        load3DModel('iphone-container', 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Apple_iPhone_15_Pro_Max_Blue_Titanium/glTF/Apple_iPhone_15_Pro_Max_Blue_Titanium.gltf');
+        // Placeholder for a generic fashion model. You'll replace this with your actual fashion model.
+        load3DModel('fashion-container', 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/CesiumMan/glTF/CesiumMan.gltf'); 
+        // Placeholder for AirPods Max model. You'll replace this.
+        load3DModel('airpods-container', 'https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoomBox/glTF/BoomBox.gltf'); 
+    });
+
+</script>
 
 </body>
-</html>
+    </html>
+    
